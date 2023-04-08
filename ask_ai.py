@@ -42,5 +42,4 @@ self_ask_with_search = initialize_agent(tools, llm, agent="self-ask-with-search"
 
 def run_llm(query):
     result = count_tokens(self_ask_with_search, query)
-    print(result)
     return result
