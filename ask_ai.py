@@ -11,6 +11,7 @@ load_dotenv()
 
 # OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+SERPAPI_API_KEY= os.environ.get("SERPAPI_API_KEY")
 
 
 llm = OpenAI(
@@ -27,7 +28,7 @@ def count_tokens(agent, query):
     return result
 
 
-search = SerpAPIWrapper(serpapi_api_key='397205ae820bcae8152be0d274966df1e529386ba82dc4ef3c89f9ac44c2942e')
+search = SerpAPIWrapper(serpapi_api_key=SERPAPI_API_KEY)
 tools = [
     Tool(
         name="Intermediate Answer",
