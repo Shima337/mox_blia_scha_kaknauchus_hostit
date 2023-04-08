@@ -5,6 +5,11 @@ import time
 
 app = Flask(__name__)
 
+@app.route('/test', methods=['GET'])
+def test():
+    return "HELLO WORLD"
+
+
 
 
 @app.route('/', methods=['GET', 'POST'])
