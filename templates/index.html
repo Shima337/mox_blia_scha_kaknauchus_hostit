@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask AI  Example</title>
+    <script>
+        function submitForm(event) {
+            event.preventDefault();
+            const form = event.target;
+            const inputText = form.querySelector('#input_text').value;
+            const messageElement = document.querySelector('#message');
+            const inputElement = document.querySelector('#input_display'); // Updated
+            const outputElement = document.querySelector('#output_display'); // Updated
+    
+            messageElement.textContent = 'Processing...';
+            inputElement.textContent = '';
+            outputElement.textContent = '';
+    
+            fetch(form.action, {
+                method: form.method,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams(new FormData(form))
+            })
+            .then(response => {
+                console.log('Response:', response);
+                return response.json();
+            })
+            .then(data => {
+                console.log('Data:', data);
+                messageElement.textContent = '';
+                inputElement.textContent = `Input: ${data.input}`;
+                outputElement.textContent = `Output: ${data.output}`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                messageElement.textContent = 'Error: ' + error;
+            });
+        }
+    </script>
+    
+    
+</head>
+<body>
+    <h1>Ask AI Example</h1>
+    <form method="post" action="{{ url_for('index') }}" onsubmit="submitForm(event)">
+        <label for="input_text">Input Text:</label>
+        <input type="text" id="input_text" name="input_text" required>
+        <button type="submit">Submit</button>
+    </form>
+    <h2>Result:</h2>
+    <p id="message"></p>
+    <p id="input_display"></p> <!-- Updated -->
+    <p id="output_display"></p> <!-- Updated -->
+</body>
+</html>
