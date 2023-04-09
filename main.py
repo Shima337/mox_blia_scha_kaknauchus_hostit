@@ -16,7 +16,10 @@ def test():
 def index():
     result = ""
     if request.method == 'POST':
-        input_text = request.form['input_text']
+        if request.form["input_text"]:
+            input_text = request.form['input_text']
+        else:
+            input_text = request.data['input_text']
         result= run_llm(input_text)
         return jsonify(result)
     return render_template('index.html')
