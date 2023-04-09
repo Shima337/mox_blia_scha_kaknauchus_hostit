@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/test', methods=['GET'])
 def test():
-    return "HELLO WORLD"
+    return "HELLO WORLD2"
 
 
 
